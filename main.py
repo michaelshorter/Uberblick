@@ -65,7 +65,7 @@ def do_job(text_file):
     print("summary done!\n")
 
 
-    haiku= 
+    
 
     '''topics,rating  = create_five_topics(text_summarization)
     
