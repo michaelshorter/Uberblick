@@ -58,7 +58,7 @@ def do_job(text_file):
 
 
 
-    print(response_summary[0]['content'])
+    #print(response_summary[0]['content'])
 
     plot_text(response_summary[0]['content'],'summary.png','summary')
     
@@ -67,6 +67,8 @@ def do_job(text_file):
     haiku = write_a_haiku(response_summary[0]['content'])
 
     plot_text(haiku[0]['content'],'haiku.png','haiku')
+
+    print("haiku done!\n")
 
 
     
@@ -92,11 +94,15 @@ def main(args):
 
         openai.api_key = api_key
 
-        print(api_key)
+    
         
         if (textfile is not None) and (os.stat(textfile).st_size != 0):
-            print(textfile)
-            do_job(textfile)
+
+            while True:
+                
+                do_job(textfile)
+
+                time.sleep(600)
             
             
          
