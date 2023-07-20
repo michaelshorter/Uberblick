@@ -66,15 +66,15 @@ def plot_text(text,filename,variant):
 
     if variant == 'summary':
 
-        plt.text(0,0,text, family='serif',size=18, wrap=True)
+        plt.text(-0.07,0,text, family='serif',size=18, wrap=True)
 
     if variant == 'haiku':
 
-        plt.text(0.25,0.4,text, family='serif',size=24, wrap=True,multialignment='center')
+        plt.text(0.1,0.4,text, family='serif',size=24, wrap=True,multialignment='center',style='italic')
 
 
     plt.xticks([])
-    plt.tight_layout()
+    #plt.tight_layout()
     plt.axis('off')
     plt.savefig(filename)
 

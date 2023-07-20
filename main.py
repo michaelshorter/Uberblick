@@ -42,7 +42,7 @@ def do_job(text_file):
     from time import sleep
 
     split_text,nmb_splits, max_number_tokens = read_text(text_file)
-    print(split_text)
+    
     
 
     if nmb_splits >1:
@@ -97,6 +97,8 @@ def main(args):
     
         
         if (textfile is not None) and (os.stat(textfile).st_size != 0):
+        
+            time.sleep(600)
 
             while True:
                 
