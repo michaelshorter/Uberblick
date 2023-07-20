@@ -98,13 +98,13 @@ def main(args):
         
         if (textfile is not None) and (os.stat(textfile).st_size != 0):
         
-            time.sleep(600)
+            time.sleep(60)
 
             while True:
                 
                 do_job(textfile)
 
-                time.sleep(600)
+                time.sleep(60)
             
             
          
