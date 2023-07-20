@@ -9,7 +9,7 @@ import argparse
 import os
 from provotype.prep import read_text
 from provotype.promts_gpt import generate_summarizer,do_summarization,summarize_summarized_texts,create_five_topics,scale_conversation,write_a_haiku
-from provotype.generate_output import plot_main_topics,plot_categories,plot_summary
+from provotype.generate_output import plot_main_topics,plot_categories,plot_text
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -60,9 +60,13 @@ def do_job(text_file):
 
     print(response_summary[0]['content'])
 
-    plot_summary(response_summary[0]['content'])
+    plot_text(response_summary[0]['content'],'summary.png')
     
     print("summary done!\n")
+
+    haiku = write_a_haiku(response_summary[0]['content'])
+
+    plot_text(haiku,'haiku.png')
 
 
     
