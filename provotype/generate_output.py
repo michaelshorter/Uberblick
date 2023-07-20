@@ -58,13 +58,20 @@ def plot_categories(str_scale, str_rating):
   
 
 
-def plot_text(text,filename):
+def plot_text(text,filename,variant):
     
     px = 1/plt.rcParams['figure.dpi']
 
     fig = plt.figure(figsize=(640*px, 480*px))
 
-    plt.text(0,0,text, family='serif',size=18, wrap=True)
+    if variant == 'summary':
+
+        plt.text(0,0,text, family='serif',size=18, wrap=True)
+
+    if variant == 'haiku':
+
+        plt.text(0.25,0.4,text, family='serif',size=24, wrap=True,multialignment='center')
+
 
     plt.xticks([])
     plt.tight_layout()
