@@ -58,7 +58,7 @@ def plot_categories(str_scale, str_rating):
   
 
 
-def plot_text(text,safefigas):
+def plot_text(text,filename):
     
     px = 1/plt.rcParams['figure.dpi']
 
@@ -69,6 +69,6 @@ def plot_text(text,safefigas):
     plt.xticks([])
     plt.tight_layout()
     plt.axis('off')
-    plt.savefig(savefigas)
+    plt.savefig(filename)
 
 

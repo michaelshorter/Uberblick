@@ -7,6 +7,7 @@ import json
 import matplotlib as plt
 import pandas as pd
 import numpy as np
+from itertools import accumulate
 
 
 

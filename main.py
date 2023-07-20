@@ -66,7 +66,7 @@ def do_job(text_file):
 
     haiku = write_a_haiku(response_summary[0]['content'])
 
-    plot_text(haiku,'haiku.png')
+    plot_text(haiku[0]['content'],'haiku.png')
 
 
     
