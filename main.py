@@ -8,16 +8,21 @@ import time
 import argparse
 import os
 from provotype.prep import read_text
-from provotype.promts_gpt import generate_summarizer,do_summarization,summarize_summarized_texts,create_five_topics,scale_conversation
+from provotype.promts_gpt import generate_summarizer,do_summarization,summarize_summarized_texts,create_five_topics,scale_conversation,write_a_haiku
 from provotype.generate_output import plot_main_topics,plot_categories,plot_summary
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--configfile', default='config.ini',metavar='N', type=str, nargs='+',
+    parser.add_argument('--configfile', default='/home/wordcloud/wordcloud_keys/config.ini',metavar='N', type=str, nargs='+',
                         help='an integer for the accumulator')
+
+    '''parser.add_argument('--configfile', default='config.ini',metavar='N', type=str, nargs='+',
+                        help='an integer for the accumulator')'''
+
     parser.add_argument('--textfile', default = '/home/wordcloud/WordCloud/AzureSpeechCC/content.txt', metavar='N', type=str, nargs='+',
                         help='an integer for the accumulator')
-   
+    '''parser.add_argument('--textfile', default = 'content.txt', metavar='N', type=str, nargs='+',
+                        help='an integer for the accumulator')'''
     args = parser.parse_args()
     print(args.configfile)
     return args
@@ -37,22 +42,30 @@ def do_job(text_file):
     from time import sleep
 
     split_text,nmb_splits, max_number_tokens = read_text(text_file)
-    print(nmb_splits,max_number_tokens)
+    print(split_text)
     
 
-    text_summarization = do_summarization(split_text,nmb_splits, max_number_tokens)
+    if nmb_splits >1:
+        text_summarization = do_summarization(split_text,nmb_splits, max_number_tokens)
 
-    text_summarization = " ".join(text_summarization)
-    
-    print(text_summarization)
+        text_summarization = " ".join(text_summarization)
 
-    response_summary = summarize_summarized_texts(text_summarization)
+        response_summary = summarize_summarized_texts(text_summarization)
+
+
+    else:
+        response_summary = summarize_summarized_texts(split_text)
+
+
 
     print(response_summary[0]['content'])
 
     plot_summary(response_summary[0]['content'])
     
     print("summary done!\n")
+
+
+    haiku= 
 
     '''topics,rating  = create_five_topics(text_summarization)
     

@@ -178,5 +178,33 @@ def scale_conversation(text_data):
 
        
 
-    return list_scale,list_rating 
+
+
+
+def write_a_haiku(summarized_text):
+    conversation = []
+  
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        max_tokens = 100,
+     
+        temperature=0.7,
+        top_p=0.5,
+        frequency_penalty=0.5,
+        messages=
+       [ {
+          "role": "system",
+          "content": "You are a creative writer.",
+         },
+        
+         {
+          "role": "user",
+          "content": f"Can you write me a haiku for following text: {summarized_text}",
+         },
+        ],
+    )
+    
+    conversation.append({'role': response.choices[0].message.role, 'content': response.choices[0].message.content})
+    
+    return conversation
 
