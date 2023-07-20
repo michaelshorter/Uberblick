@@ -208,3 +208,15 @@ def write_a_haiku(summarized_text):
     
     return conversation
 
+
+def create_image(text):
+
+    user_prompt = text
+    response = openai.Image.create(
+        prompt = user_prompt,
+        n=1,
+        size = "512x512"
+    )
+    image_url = response['data'][0]['url']
+
+    return image_url

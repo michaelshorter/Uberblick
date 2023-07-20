@@ -2,6 +2,7 @@ import os.path
 import time
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
+import urllib
 
 
 
@@ -79,3 +80,6 @@ def plot_text(text,filename,variant):
     plt.savefig(filename)
 
 
+def generate_image(img_url):
+    file_name = "image.png"
+    urllib.request.urlretrieve(image_url,file_name)

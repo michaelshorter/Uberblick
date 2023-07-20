@@ -8,8 +8,8 @@ import time
 import argparse
 import os
 from provotype.prep import read_text
-from provotype.promts_gpt import generate_summarizer,do_summarization,summarize_summarized_texts,create_five_topics,scale_conversation,write_a_haiku
-from provotype.generate_output import plot_main_topics,plot_categories,plot_text
+from provotype.promts_gpt import generate_summarizer,do_summarization,summarize_summarized_texts,create_five_topics,scale_conversation,write_a_haiku,create_image
+from provotype.generate_output import plot_main_topics,plot_categories,plot_text,generate_image
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -69,6 +69,10 @@ def do_job(text_file):
     plot_text(haiku[0]['content'],'haiku.png','haiku')
 
     print("haiku done!\n")
+
+    image_url=create_image(response_summary[0]['content'])
+    generate_image(image_url)
+
 
 
     
