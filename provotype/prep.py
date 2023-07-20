@@ -6,8 +6,6 @@ import time
 import json
 import matplotlib as plt
 import pandas as pd
-import seaborn as sns
-import pandas as pd
 import numpy as np
 
 
@@ -21,7 +19,7 @@ def read_text(textfile):
     print(len(data))
     
     if len(data)>=10000:
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size = 10000, chunk_overlap = 0)
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size = 9000, chunk_overlap = 0)
         texts= text_splitter.split_text(data)
         number_splits = len(texts)
         max_response_tokens = round(4096/number_splits-200)
