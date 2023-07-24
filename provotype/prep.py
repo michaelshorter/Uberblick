@@ -47,20 +47,22 @@ def read_text(textfile):
 
 
 def prepare_json_topics(repsonse_input):
-    
-    list_topics=[]
-    list_probas =[]
+
+
+    dict_topics = {}
 
     y=json.loads(repsonse_input[0]['content'])
 
 
     for topic in y['topics']:
-        
-        list_topics.append(topic['topic'])
-        list_probas.append(topic['rating'])
+
+        dict_topics[topic['topic']]= topic['rating']
+
+
+        sorted_dict_topis = sorted(dict_topics.items(), key=lambda x:x[1],reverse=True )
 
     
-    return list_topics, list_probas
+    return sorted_dict_topis
 
 
 
