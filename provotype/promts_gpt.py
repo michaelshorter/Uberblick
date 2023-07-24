@@ -3,30 +3,49 @@ import time
 from provotype.prep import prepare_json_topics,prepare_json_scale
 import json
 from time import sleep
+import logging
 
 model_id = 'gpt-3.5-turbo'
 
 def generate_summarizer(my_tokens,prompt):
 
-    res = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        max_tokens=my_tokens,
-        temperature=0.7,
-        top_p=0.5,
-        frequency_penalty=0.5,
-        messages=
-       [
-         {
-          "role": "system",
-          "content": "You are a helpful assistant for text summarization.",
-         },
-         {
-          "role": "user",
-          "content": f"Can you make a summariziation for following text: {prompt}",
-         },
-        ],
-    )
-    return res["choices"][0]["message"]["content"]
+    prompts = 0
+    conversation=[]
+
+    while conversation==[]:
+
+
+        if (prompts % 3) == 0 and prompts !=0:
+                print("waiting for 60 seconds")
+                sleep(60) 
+
+        try:
+
+            res = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                max_tokens=my_tokens,
+                temperature=0.7,
+                top_p=0.5,
+                frequency_penalty=0.5,
+                messages=
+               [
+                 {
+                  "role": "system",
+                  "content": "You are a helpful assistant for text summarization.",
+                 },
+                 {
+                  "role": "user",
+                  "content": f"Can you make a summariziation for following text: {prompt}",
+                 },
+                ],
+            )
+            conversation = res["choices"][0]["message"]["content"]
+        except:
+            pass
+            prompts=prompts+1
+
+
+    return conversation 
 
 
 
@@ -35,7 +54,9 @@ def do_summarization(split_text,number_splits,response_max_tokens):
     from time import sleep
 
     summarized_text = []
+
     nmb_splits = number_splits
+    
     print(number_splits)
    
     max_tokens = response_max_tokens
@@ -105,29 +126,45 @@ def create_five_topics(text_data):
 
 def summarize_summarized_texts(summarized_text):
     conversation = []
-  
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        max_tokens = 100,
-     
-        temperature=0.7,
-        top_p=0.5,
-        frequency_penalty=0.5,
-        messages=
-       [
-         {
-          "role": "system",
-          "content": "You are a helpful assistant for text summarization.",
-         },
-         {
-          "role": "user",
-          "content": f"Can you make a summariziation with the maximum number of tokens for following text: {summarized_text}",
-         },
-        ],
-    )
-    
-    conversation.append({'role': response.choices[0].message.role, 'content': response.choices[0].message.content})
-    
+
+    prompts=0
+
+    while conversation==[]:
+
+
+        if (prompts % 3) == 0 and prompts !=0:
+                print("waiting for 60 seconds")
+                sleep(60) 
+
+        try:
+
+
+      
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                max_tokens = 100,
+             
+                temperature=0.7,
+                top_p=0.5,
+                frequency_penalty=0.5,
+                messages=
+               [
+                 {
+                  "role": "system",
+                  "content": "You are a helpful assistant for text summarization.",
+                 },
+                 {
+                  "role": "user",
+                  "content": f"Can you make a summariziation with the maximum number of tokens for following text: {summarized_text}",
+                 },
+                ],
+            )
+            
+            conversation.append({'role': response.choices[0].message.role, 'content': response.choices[0].message.content})
+        except:
+            pass 
+            promts = promts +1
+        
     return conversation
 
 
@@ -183,40 +220,71 @@ def scale_conversation(text_data):
 
 def write_a_haiku(summarized_text):
     conversation = []
-  
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        max_tokens = 100,
-     
-        temperature=0.7,
-        top_p=0.5,
-        frequency_penalty=0.5,
-        messages=
-       [ {
-          "role": "system",
-          "content": "You are a creative writer.",
-         },
-        
-         {
-          "role": "user",
-          "content": f"Can you write me a haiku for following text: {summarized_text}",
-         },
-        ],
-    )
-    
-    conversation.append({'role': response.choices[0].message.role, 'content': response.choices[0].message.content})
+    prompts=0
+
+    while conversation == []:
+
+        if (prompts % 3) == 0 and prompts !=0:
+            print("waiting for 60 seconds")
+            sleep(60)
+
+
+        try:
+
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                max_tokens = 100,
+             
+                temperature=0.7,
+                top_p=0.5,
+                frequency_penalty=0.5,
+                messages=
+               [ {
+                  "role": "system",
+                  "content": "You are a creative writer.",
+                 },
+                
+                 {
+                  "role": "user",
+                  "content": f"Can you write me a haiku for following text: {summarized_text}",
+                 },
+                ],
+            )
+            
+            conversation.append({'role': response.choices[0].message.role, 'content': response.choices[0].message.content})
+        except:
+            pass 
+            prompts = prompts +1
     
     return conversation
 
 
 def create_image(text):
 
-    user_prompt = text
-    response = openai.Image.create(
-        prompt = user_prompt,
-        n=1,
-        size = "512x512"
-    )
-    image_url = response['data'][0]['url']
+    image_url = []
+
+    prompts = 0
+
+    while image_url==[]:
+
+        if (prompts % 3) == 0 and prompts !=0:
+            print("waiting for 60 seconds")
+            sleep(60)
+
+
+        try:
+
+            user_prompt = text
+            response = openai.Image.create(
+                prompt = user_prompt,
+                n=1,
+                size = "512x512"
+            )
+            image_url = response['data'][0]['url']
+
+
+        except:
+            prompts=prompts+1
+            pass
 
     return image_url
