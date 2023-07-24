@@ -40,8 +40,8 @@ def generate_summarizer(my_tokens,prompt):
                 ],
             )
             conversation = res["choices"][0]["message"]["content"]
-        except:
-            pass
+        except Exception as e:
+            print(f'during the summarization following exception occured:{str(e)}')
             prompts=prompts+1
 
 
@@ -107,8 +107,8 @@ def create_five_topics(text_data):
             conversation.append({'role': response.choices[0].message.role, 'content': response.choices[0].message.content})
             
 
-        except: 
-            pass
+        except Exception as e: 
+            print(f'during the topics following exception occured:{str(e)}')
             prompts = prompts+1
 
 
@@ -161,8 +161,8 @@ def summarize_summarized_texts(summarized_text):
             )
             
             conversation.append({'role': response.choices[0].message.role, 'content': response.choices[0].message.content})
-        except:
-            pass 
+        except Exception as e:
+            print(f'during the summarization of all summaries following exception occured:{str(e)}')    
             promts = promts +1
         
     return conversation
