@@ -7,6 +7,7 @@ import os.path
 import time
 import argparse
 import os
+import urllib
 from provotype.prep import read_text
 from provotype.promts_gpt import generate_summarizer,do_summarization,summarize_summarized_texts,create_five_topics,scale_conversation,write_a_haiku,create_image
 from provotype.generate_output import plot_main_topics,plot_categories,plot_text,generate_image
@@ -71,19 +72,22 @@ def do_job(text_file):
     print("haiku done!\n")
 
     image_url=create_image(response_summary[0]['content'])
-    generate_image(image_url)
+    print("url image done!\n")
+    file_name = "image.png"
+    urllib.request.urlretrieve(image_url,file_name)
+    print("image done!\n")
 
 
 
     
 
-    '''topics,rating  = create_five_topics(text_summarization)
+    topics,rating  = create_five_topics(text_summarization)
     
     plot_main_topics(topics,rating)
     print("topics done!\n")
     
 
-    list_scale, list_rating_scale = scale_conversation(text_summarization)
+    '''list_scale, list_rating_scale = scale_conversation(text_summarization)
     print("scale conversation done!\n")
     plot_categories(list_scale, list_rating_scale)'''
 
@@ -102,13 +106,13 @@ def main(args):
         
         if (textfile is not None) and (os.stat(textfile).st_size != 0):
         
-            time.sleep(60)
+            time.sleep(30)
 
             while True:
                 
                 do_job(textfile)
 
-                time.sleep(60)
+                time.sleep(300)
             
             
          
