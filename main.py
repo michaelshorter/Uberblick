@@ -7,6 +7,7 @@ import os.path
 import time
 import argparse
 import os
+import urllib
 from provotype.prep import read_text
 from provotype.promts_gpt import generate_summarizer,do_summarization,summarize_summarized_texts,create_five_topics,scale_conversation,write_a_haiku,create_image
 from provotype.generate_output import plot_main_topics,plot_categories,plot_text,generate_image
@@ -55,37 +56,42 @@ def do_job(text_file):
 
     else:
         response_summary = summarize_summarized_texts(split_text)
+        
+    summary = response_summary[0]['content']
+    print(summary)
 
-
-
-    #print(response_summary[0]['content'])
-
-    plot_text(response_summary[0]['content'],'summary.png','summary')
-    
+    plot_text(summary,'summary.png','summary')
     print("summary done!\n")
 
-    haiku = write_a_haiku(response_summary[0]['content'])
-
+    haiku = write_a_haiku(summary)
     plot_text(haiku[0]['content'],'haiku.png','haiku')
-
     print("haiku done!\n")
 
     image_url=create_image(response_summary[0]['content'])
-    generate_image(image_url)
+    print("url image done!\n")
+    file_name = "image.png"
+    urllib.request.urlretrieve(image_url,file_name)
+    print("image done!\n")
 
+  
 
+<<<<<<< HEAD
 
     
 
     sorted_dict_topic  = create_five_topics(text_summarization)
     
     plot_main_topics(sorted_dict_topic)
+=======
+    topics,rating  = create_five_topics(summary)
+    plot_main_topics(topics,rating)
+>>>>>>> 3fd47b20d736454c19ce665ac6c04f8f790457e0
     print("topics done!\n")
     
 
-    list_scale, list_rating_scale = scale_conversation(text_summarization)
+    list_scale, list_rating_scale = scale_conversation(summary)
+    plot_categories(list_scale, list_rating_scale)
     print("scale conversation done!\n")
-    plot_categories(list_scale, list_rating_scale)'''
 
 
 
@@ -102,13 +108,13 @@ def main(args):
         
         if (textfile is not None) and (os.stat(textfile).st_size != 0):
         
-            time.sleep(60)
+            time.sleep(30)
 
             while True:
                 
                 do_job(textfile)
 
-                time.sleep(60)
+                time.sleep(300)
             
             
          
