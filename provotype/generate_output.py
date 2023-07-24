@@ -14,7 +14,9 @@ def grey_color_func(word, font_size, position,orientation,random_state=None, **k
 
 
 # define drawing of the words and links separately.
-def plot_main_topics(topics,values):
+def plot_main_topics(sorted_dict_topics):
+
+    color=["00000","#36454F","#808080","#899499","#D3D3D3"]
 
     
 
@@ -23,8 +25,13 @@ def plot_main_topics(topics,values):
     fig = plt.figure(figsize=(640*px, 480*px))
     plt.clf()
     
-    for i, word in enumerate(topics):
-        plt.text(0.5,0.9-i*0.2, word, ha="center", va="center",size=values[i]*30)
+    i = 0
+    for key in dict_topics:
+       
+        
+        plt.text(0.5,0.9-i*0.2, key[0], ha="center", va="center",size=30, color = color[i])
+
+        i = i+1
         
     plt.axis('off')
     plt.savefig('main_topics.png')

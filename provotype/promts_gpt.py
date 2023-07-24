@@ -115,13 +115,13 @@ def create_five_topics(text_data):
 
         try:
            
-            list_topics, list_rating = prepare_json_topics(conversation)
+            sorted_dict_topis = prepare_json_topics(conversation)
 
         except:
             conversation = []
     
     
-    return list_topics,list_rating 
+    return sorted_dict_topis
 
 
 def summarize_summarized_texts(summarized_text):
