@@ -55,6 +55,8 @@ def do_job(text_file):
 
 
     else:
+
+        text_summarization = split_text
         response_summary = summarize_summarized_texts(split_text)
         
     summary = response_summary[0]['content']
@@ -83,9 +85,9 @@ def do_job(text_file):
     print("topics done!\n")
     
 
-    '''list_scale, list_rating_scale = scale_conversation(summary)
+    list_scale, list_rating_scale = scale_conversation(text_summarization)
     plot_categories(list_scale, list_rating_scale)
-    print("scale conversation done!\n")'''
+    print("scale conversation done!\n")
 
 
 
