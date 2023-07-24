@@ -26,7 +26,7 @@ def plot_main_topics(sorted_dict_topics):
     plt.clf()
     
     i = 0
-    for key in dict_topics:
+    for key in sorted_dict_topics:
        
         
         plt.text(0.5,0.9-i*0.2, key[0], ha="center", va="center",size=30, color = color[i])

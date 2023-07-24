@@ -83,9 +83,9 @@ def do_job(text_file):
     print("topics done!\n")
     
 
-    list_scale, list_rating_scale = scale_conversation(summary)
+    '''list_scale, list_rating_scale = scale_conversation(summary)
     plot_categories(list_scale, list_rating_scale)
-    print("scale conversation done!\n")
+    print("scale conversation done!\n")'''
 
 
 
