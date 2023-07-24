@@ -73,19 +73,13 @@ def do_job(text_file):
     urllib.request.urlretrieve(image_url,file_name)
     print("image done!\n")
 
-  
-
-<<<<<<< HEAD
-
-    
+     
 
     sorted_dict_topic  = create_five_topics(text_summarization)
     
     plot_main_topics(sorted_dict_topic)
-=======
-    topics,rating  = create_five_topics(summary)
-    plot_main_topics(topics,rating)
->>>>>>> 3fd47b20d736454c19ce665ac6c04f8f790457e0
+
+
     print("topics done!\n")
     
 
