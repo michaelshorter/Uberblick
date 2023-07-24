@@ -58,17 +58,13 @@ def do_job(text_file):
         response_summary = summarize_summarized_texts(split_text)
         
     summary = response_summary[0]['content']
-
     print(summary)
 
     plot_text(summary,'summary.png','summary')
-    
     print("summary done!\n")
 
     haiku = write_a_haiku(summary)
-
     plot_text(haiku[0]['content'],'haiku.png','haiku')
-
     print("haiku done!\n")
 
     image_url=create_image(response_summary[0]['content'])
@@ -77,19 +73,16 @@ def do_job(text_file):
     urllib.request.urlretrieve(image_url,file_name)
     print("image done!\n")
 
-
-
-    
+  
 
     topics,rating  = create_five_topics(summary)
-    
     plot_main_topics(topics,rating)
     print("topics done!\n")
     
 
-    '''list_scale, list_rating_scale = scale_conversation(text_summarization)
+    list_scale, list_rating_scale = scale_conversation(summary)
+    plot_categories(list_scale, list_rating_scale)
     print("scale conversation done!\n")
-    plot_categories(list_scale, list_rating_scale)'''
 
 
 
