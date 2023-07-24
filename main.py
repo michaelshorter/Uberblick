@@ -75,7 +75,7 @@ def do_job(text_file):
 
      
 
-    sorted_dict_topic  = create_five_topics(text_summarization)
+    sorted_dict_topic  = create_five_topics(summary)
     
     plot_main_topics(sorted_dict_topic)
 
