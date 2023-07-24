@@ -56,16 +56,16 @@ def do_job(text_file):
 
     else:
         response_summary = summarize_summarized_texts(split_text)
+        
+    summary = response_summary[0]['content']
 
+    print(summary)
 
-
-    #print(response_summary[0]['content'])
-
-    plot_text(response_summary[0]['content'],'summary.png','summary')
+    plot_text(summary,'summary.png','summary')
     
     print("summary done!\n")
 
-    haiku = write_a_haiku(response_summary[0]['content'])
+    haiku = write_a_haiku(summary)
 
     plot_text(haiku[0]['content'],'haiku.png','haiku')
 
@@ -81,7 +81,7 @@ def do_job(text_file):
 
     
 
-    topics,rating  = create_five_topics(text_summarization)
+    topics,rating  = create_five_topics(summary)
     
     plot_main_topics(topics,rating)
     print("topics done!\n")
