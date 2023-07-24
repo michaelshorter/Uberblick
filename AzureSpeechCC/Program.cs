@@ -11,11 +11,16 @@ using System.IO.Pipes;
 class Program
 {
 
-    static string YourSubscriptionKey = "xxxxxxxxxxxxxx";
+   // static string subscriptionKeyFilePath = "Home/wordcloud_keys/azure_api.txt";
+    static string YourSubscriptionKey = "";
     static string YourServiceRegion = "uksouth";
 
     async static Task Main(string[] args)
     {
+    
+    	string subscriptionKeyFilePath = "/home/wordcloud/wordcloud_keys/azure_api.txt";
+    	string YourSubscriptionKey = File.ReadAllText(subscriptionKeyFilePath).Trim();
+    	
         using var pipe = new NamedPipeServerStream("testpipe");
         Console.WriteLine("Waiting for pipe client to connect...");
         pipe.WaitForConnection();
