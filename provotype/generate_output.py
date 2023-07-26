@@ -1,6 +1,7 @@
 import os.path
 import time
 import matplotlib.pyplot as plt
+from matplotlib.patches import FancyBboxPatch
 from wordcloud import WordCloud
 import urllib
 
@@ -74,11 +75,15 @@ def plot_text(text,filename,variant):
 
     if variant == 'summary':
 
-        plt.text(-0.07,0,text, family='serif',size=18, wrap=True)
+        #bbox_props = dict(boxstyle='round,pad=0', ec='black', lw=1, fc='white')
+        plt.text(-0.1, 0, text, family='serif', size=18, wrap=True)
+        #plt.tight_layout(pad=0)
+        #plt.subplots_adjust(left=0.1)
+
 
     if variant == 'haiku':
 
-        plt.text(0.1,0.4,text, family='serif',size=24, wrap=True,multialignment='center',style='italic')
+        plt.text(0,0.4,text, family='serif',size=24, wrap=True, linespacing=2, multialignment='center',style='italic')
 
 
     plt.xticks([])

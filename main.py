@@ -69,7 +69,7 @@ def do_job(text_file):
     plot_text(haiku[0]['content'],'haiku.png','haiku')
     print("haiku done!\n")
 
-    image_url=create_image(response_summary[0]['content'])
+    image_url=create_image('create a vaporwave art without text for: ' + response_summary[0]['content'])
     print("url image done!\n")
     file_name = "image.png"
     urllib.request.urlretrieve(image_url,file_name)
@@ -85,9 +85,9 @@ def do_job(text_file):
     print("topics done!\n")
     
 
-    list_scale, list_rating_scale = scale_conversation(text_summarization)
+    '''list_scale, list_rating_scale = scale_conversation(text_summarization)
     plot_categories(list_scale, list_rating_scale)
-    print("scale conversation done!\n")
+    print("scale conversation done!\n")'''
 
 
 

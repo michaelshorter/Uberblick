@@ -18,9 +18,9 @@ last_state_change_time = time.time()
 
 # Dictionary to store the image file associated with each switch state
 switch_images = {
-    (0, 1, 1, 1): "summary.png",
+    (0, 1, 1, 1): "image.png",
     (1, 0, 1, 1): "haiku.png",
-    (1, 1, 0, 1): "image.png",
+    (1, 1, 0, 1): "summary.png",
     (1, 1, 1, 0): "main_topics.png"
 }
 
