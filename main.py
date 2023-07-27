@@ -144,16 +144,18 @@ def main(args):
 if __name__=='__main__':  
 
      # instantiate logger
-    logger = logging.getLogger(__name__)
+    
 
     logging.basicConfig(
-            #format="%(asctime)s [%(levelname)s]: %(message)s in %(pathname)s:%(lineno)d",
+            format="%(asctime)s [%(levelname)s]: %(levelname)s - %(name)s - %(message)s",
             datefmt = '%m/%d/%Y %I:%M:%S %p',
             filename = 'example.log',
             level=logging.INFO,
             filemode='w',
             #stream=sys.stdout
         )
+
+    logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
 
     # define handler and formatter
