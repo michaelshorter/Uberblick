@@ -24,16 +24,16 @@ import sys
 
 def get_args():
     parser = argparse.ArgumentParser()
-    '''parser.add_argument('--configfile', default='/home/wordcloud/wordcloud_keys/config.ini',metavar='N', type=str, nargs='+',
-                        help='an integer for the accumulator')'''
-
-    parser.add_argument('--configfile', default='config.ini',metavar='N', type=str, nargs='+',
+    parser.add_argument('--configfile', default='/home/wordcloud/wordcloud_keys/config.ini',metavar='N', type=str, nargs='+',
                         help='an integer for the accumulator')
 
-    '''parser.add_argument('--textfile', default = '/home/wordcloud/WordCloud/AzureSpeechCC/content.txt', metavar='N', type=str, nargs='+',
+    '''parser.add_argument('--configfile', default='config.ini',metavar='N', type=str, nargs='+',
                         help='an integer for the accumulator')'''
-    parser.add_argument('--textfile', default = 'content.txt', metavar='N', type=str, nargs='+',
+
+    parser.add_argument('--textfile', default = '/home/wordcloud/WordCloud/AzureSpeechCC/content.txt', metavar='N', type=str, nargs='+',
                         help='an integer for the accumulator')
+    '''parser.add_argument('--textfile', default = 'content.txt', metavar='N', type=str, nargs='+',
+                        help='an integer for the accumulator')'''
     args = parser.parse_args()
     print(args.configfile)
     return args
