@@ -8,7 +8,27 @@ import matplotlib as plt
 import pandas as pd
 import numpy as np
 from itertools import accumulate
+import logging
 
+
+
+def init_logging(infoLog=True, debugLog=True, consoleLog=True):
+    # what you currently have
+
+    # this is just to create a working demo
+    logging.basicConfig(
+        format="%(asctime)s [%(levelname)s]: %(message)s in %(pathname)s:%(lineno)d",
+        datefmt = '%m/%d/%Y %I:%M:%S %p',
+        filename = 'example.log',
+        level=logging.INFO,
+        filemode='w'
+    )
+    logger = logging.getLogger('testlog')
+    '''h = logging.handlers.SysLogHandler()
+    h.setLevel(logging.ERROR)
+
+    logger.addHandler(h)'''
+    return logger
 
 
 

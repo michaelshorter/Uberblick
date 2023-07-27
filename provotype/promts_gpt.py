@@ -1,14 +1,17 @@
 import openai
 import time
-from provotype.prep import prepare_json_topics,prepare_json_scale
+from provotype.prep import prepare_json_topics,prepare_json_scale,init_logging
 import json
 from time import sleep
 import logging
+
+
 
 model_id = 'gpt-3.5-turbo'
 
 def generate_summarizer(my_tokens,prompt):
 
+    
     prompts = 0
     conversation=[]
 
@@ -163,7 +166,7 @@ def summarize_summarized_texts(summarized_text):
             conversation.append({'role': response.choices[0].message.role, 'content': response.choices[0].message.content})
         except Exception as e:
             print(f'during the summarization of all summaries following exception occured:{str(e)}')    
-            promts = promts +1
+            promts = prompts +1
         
     return conversation
 
@@ -252,8 +255,8 @@ def write_a_haiku(summarized_text):
             )
             
             conversation.append({'role': response.choices[0].message.role, 'content': response.choices[0].message.content})
-        except:
-            pass 
+        except Exception as e:
+            print(f'during haiku following exception occured:{str(e)}') 
             prompts = prompts +1
     
     return conversation
@@ -283,8 +286,8 @@ def create_image(text):
             image_url = response['data'][0]['url']
 
 
-        except:
-            prompts=prompts+1
-            pass
+        except Exception as e:
+            print(f'during image following exception occured:{str(e)}') 
+            prompts = prompts +1
 
     return image_url

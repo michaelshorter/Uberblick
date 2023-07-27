@@ -2,7 +2,7 @@ import os.path
 import time
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch
-from wordcloud import WordCloud
+
 import urllib
 
 
