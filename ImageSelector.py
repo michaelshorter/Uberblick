@@ -71,4 +71,3 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         # Clean up GPIO on keyboard interrupt
         GPIO.cleanup()
-

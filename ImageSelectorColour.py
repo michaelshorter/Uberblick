@@ -18,10 +18,10 @@ last_state_change_time = time.time()
 
 # Dictionary to store the image file associated with each switch state
 switch_images = {
-    (0, 1, 1, 1): "TestImages/test.jpg",
-    (1, 0, 1, 1): "TestImages/Wordcloud.jpg",
-    (1, 1, 0, 1): "TestImages/beach.jpg",
-    (1, 1, 1, 0): "TestImages/Trio.jpg"
+    (0, 1, 1, 1): "image.png",
+    (1, 0, 1, 1): "haiku.png",
+    (1, 1, 0, 1): "summary.png",
+    (1, 1, 1, 0): "main_topics.png"
 }
 
 # Function to determine the position of the switch
