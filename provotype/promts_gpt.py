@@ -1,6 +1,6 @@
 import openai
 import time
-from provotype.prep import prepare_json_topics,prepare_json_scale,init_logging
+from provotype.prep import prepare_json_topics
 import json
 from time import sleep
 import logging
