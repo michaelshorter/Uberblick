@@ -35,7 +35,7 @@ def print_switch_position(position):
 
     if position in switch_images:
         print(f"Mode {switch_images[position]}")
-        os.system(f"python3 dither-image-what.py --colour 'red' --image '{switch_images[position]}'")
+        os.system(f"python3 dither-image-what.py --colour 'black' --image '{switch_images[position]}'")
         print(f"Mode {switch_images[position]} process completed")
     else:
         print("Unknown Position")
@@ -65,7 +65,7 @@ if __name__ == "__main__":
             if time.time() - last_state_change_time >= 60:
                 # Perform image reload for the current switch state
                 if prev_switch_state in switch_images:
-                    os.system(f"python3 dither-image-what.py --colour 'red' --image '{switch_images[prev_switch_state]}'")
+                    os.system(f"python3 dither-image-what.py --colour 'black' --image '{switch_images[prev_switch_state]}'")
                 last_state_change_time = time.time()  # Reset the timer
 
     except KeyboardInterrupt:

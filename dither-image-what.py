@@ -58,6 +58,8 @@ pal_img.putpalette((255, 255, 255, 0, 0, 0, 255, 0, 0) + (0, 0, 0) * 252)
 img = img.convert("RGB").quantize(palette=pal_img)
 
 # Display the final image on Inky wHAT
-
+print("Almost Done.")
 inky_display.set_image(img)
+print("....")
 inky_display.show()
+print("Done.")
