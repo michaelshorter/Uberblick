@@ -7,10 +7,20 @@ import os.path
 import time
 import argparse
 import os
+import logging
 import urllib
 from provotype.prep import read_text
 from provotype.promts_gpt import generate_summarizer,do_summarization,summarize_summarized_texts,create_five_topics,scale_conversation,write_a_haiku,create_image
 from provotype.generate_output import plot_main_topics,plot_categories,plot_text,generate_image
+import logging
+import sys
+
+
+
+
+
+
+
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -42,6 +52,8 @@ def do_job(text_file):
     
     from time import sleep
 
+    logger.info('starting with summarization')
+
     split_text,nmb_splits, max_number_tokens = read_text(text_file)
     
     
@@ -60,29 +72,26 @@ def do_job(text_file):
         response_summary = summarize_summarized_texts(split_text)
         
     summary = response_summary[0]['content']
-    print(summary)
-
+    logger.info('summarization done')
     plot_text(summary,'summary.png','summary')
-    print("summary done!\n")
 
+    logger.info('starting with haiku')
     haiku = write_a_haiku(summary)
     plot_text(haiku[0]['content'],'haiku.png','haiku')
-    print("haiku done!\n")
+    logger.info('haiku done')
 
+    logger.info('starting with image creation')
     image_url=create_image('create a vaporwave art without text for: ' + response_summary[0]['content'])
-    print("url image done!\n")
     file_name = "image.png"
     urllib.request.urlretrieve(image_url,file_name)
-    print("image done!\n")
+    logger.info('image done')
 
      
 
+    logger.info('starting with top topics')
     sorted_dict_topic  = create_five_topics(summary)
-    
     plot_main_topics(sorted_dict_topic)
-
-
-    print("topics done!\n")
+    logger.info('top topics done')
     
 
     '''list_scale, list_rating_scale = scale_conversation(text_summarization)
@@ -92,6 +101,16 @@ def do_job(text_file):
 
 
 def main(args):
+
+
+   
+
+
+
+    logger.info("Program started")
+
+
+
     config = args.configfile
     textfile = args.textfile
     
@@ -123,6 +142,31 @@ def main(args):
 
 
 if __name__=='__main__':  
+
+     # instantiate logger
+    logger = logging.getLogger(__name__)
+
+    logging.basicConfig(
+            #format="%(asctime)s [%(levelname)s]: %(message)s in %(pathname)s:%(lineno)d",
+            datefmt = '%m/%d/%Y %I:%M:%S %p',
+            filename = 'example.log',
+            level=logging.INFO,
+            filemode='w',
+            #stream=sys.stdout
+        )
+    logger.setLevel(logging.INFO)
+
+    # define handler and formatter
+    handler = logging.StreamHandler()
+    formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(name)s - %(message)s")
+
+    # add formatter to handler
+    handler.setFormatter(formatter)
+
+    # add handler to logger
+    logger.addHandler(handler)
+
+
    
     args = get_args()
     main(args)
