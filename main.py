@@ -11,7 +11,7 @@ import logging
 import urllib
 from provotype.prep import read_text
 from provotype.promts_gpt import generate_summarizer,do_summarization,summarize_summarized_texts,create_five_topics,scale_conversation,write_a_haiku,create_image
-from provotype.generate_output import plot_main_topics,plot_categories,plot_text,generate_image
+from provotype.generate_output import plot_main_topics,plot_categories,plot_text,generate_image,plot_text_pil
 import logging
 import sys
 
@@ -24,16 +24,16 @@ import sys
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--configfile', default='/home/wordcloud/wordcloud_keys/config.ini',metavar='N', type=str, nargs='+',
-                        help='an integer for the accumulator')
-
-    '''parser.add_argument('--configfile', default='config.ini',metavar='N', type=str, nargs='+',
+    '''parser.add_argument('--configfile', default='/home/wordcloud/wordcloud_keys/config.ini',metavar='N', type=str, nargs='+',
                         help='an integer for the accumulator')'''
 
-    parser.add_argument('--textfile', default = '/home/wordcloud/WordCloud/AzureSpeechCC/content.txt', metavar='N', type=str, nargs='+',
+    parser.add_argument('--configfile', default='config.ini',metavar='N', type=str, nargs='+',
                         help='an integer for the accumulator')
-    '''parser.add_argument('--textfile', default = 'content.txt', metavar='N', type=str, nargs='+',
+
+    '''parser.add_argument('--textfile', default = '/home/wordcloud/WordCloud/AzureSpeechCC/content.txt', metavar='N', type=str, nargs='+',
                         help='an integer for the accumulator')'''
+    parser.add_argument('--textfile', default = 'content.txt', metavar='N', type=str, nargs='+',
+                        help='an integer for the accumulator')
     args = parser.parse_args()
     print(args.configfile)
     return args
@@ -44,7 +44,6 @@ def parse_config(configfile):
     config.read(configfile)
     api_key = config['API']['my_api']
     return api_key
-   
  
 
 
@@ -73,7 +72,9 @@ def do_job(text_file):
         
     summary = response_summary[0]['content']
     logger.info('summarization done')
-    plot_text(summary,'summary.png','summary')
+
+    plot_text_pil(summary,'summary.png')
+    #plot_text(summary,'summary.png','summary')
 
     logger.info('starting with haiku')
     haiku = write_a_haiku(summary)
@@ -102,14 +103,7 @@ def do_job(text_file):
 
 def main(args):
 
-
-   
-
-
-
     logger.info("Program started")
-
-
 
     config = args.configfile
     textfile = args.textfile
@@ -118,8 +112,6 @@ def main(args):
         api_key = parse_config(config)
 
         openai.api_key = api_key
-
-    
         
         if (textfile is not None) and (os.stat(textfile).st_size != 0):
         
@@ -131,15 +123,12 @@ def main(args):
 
                 time.sleep(300)
             
-            
-         
+                 
         else:
             print("no textfile available")
             exit()
         
-    
-
-
+ 
 
 if __name__=='__main__':  
 

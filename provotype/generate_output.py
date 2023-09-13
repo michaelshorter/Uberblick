@@ -2,7 +2,8 @@ import os.path
 import time
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch
-
+from PIL import Image, ImageDraw, ImageFont
+from textwrap import wrap
 import urllib
 
 
@@ -12,6 +13,31 @@ def grey_color_func(word, font_size, position,orientation,random_state=None, **k
     return "black"
 
 
+
+def get_y_and_heights(text_wrapped, dimensions, margin, font):
+    """Get the first vertical coordinate at which to draw text and the height of each line of text"""
+    # https://stackoverflow.com/a/46220683/9263761
+    ascent, descent = font.getmetrics()
+  
+
+    # Calculate the height needed to draw each line of text (including its bottom margin)
+    line_heights = [
+        font.getmask(text_line).getbbox()[3] + descent + margin
+        for text_line in text_wrapped
+    ]
+    # The last line doesn't have a bottom margin
+    line_heights[-1] -= margin
+
+    
+
+    # Total height needed
+    height_text = sum(line_heights)
+
+    # Calculate the Y coordinate at which to draw the first line of text
+    y = (dimensions[1] - height_text) // 2
+
+    # Return the first Y coordinate and a list with the height of each line
+    return (y, line_heights)
 
 
 # define drawing of the words and links separately.
@@ -90,6 +116,52 @@ def plot_text(text,filename,variant):
     #plt.tight_layout()
     plt.axis('off')
     plt.savefig(filename)
+
+
+def plot_text_pil(text,filename):
+
+    FONT_FAMILY = "arial.ttf"
+    WIDTH = 640
+    HEIGHT = 480
+    FONT_SIZE = 20
+    V_MARGIN =  1.5
+    CHAR_LIMIT = 65
+    TEXT_COLOR = (0,0,0)
+
+    # Create the font
+    font = ImageFont.truetype(FONT_FAMILY, FONT_SIZE)
+    # New image based on the settings defined above
+    img = Image.new("RGB", (WIDTH, HEIGHT),color=(255,255,255))
+    # Interface to draw on the image
+    draw_interface = ImageDraw.Draw(img)
+
+        # Wrap the `text` string into a list of `CHAR_LIMIT`-character strings
+    text_lines = wrap(text, CHAR_LIMIT)
+    # Get the first vertical coordinate at which to draw text and the height of each line of text
+    y, line_heights = get_y_and_heights(
+        text_lines,
+        (WIDTH, HEIGHT),
+        V_MARGIN,
+        font
+    )
+
+    # Draw each line of text
+    for i, line in enumerate(text_lines):
+        # Calculate the horizontally-centered position at which to draw this line
+        line_width = font.getmask(line).getbbox()[2]
+        x = ((WIDTH - line_width) // 2)
+      
+
+        # Draw this line
+        draw_interface.text((30, y), line, font=font, fill=TEXT_COLOR)
+
+        # Move on to the height at which the next line should be drawn at
+        #print(y)
+        y += line_heights[i]
+        
+
+    # Save the resulting image
+    img.save(filename)
 
 
 def generate_image(img_url):
