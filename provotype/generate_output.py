@@ -167,3 +167,55 @@ def plot_text_pil(text,filename):
 def generate_image(img_url):
     file_name = "image.png"
     urllib.request.urlretrieve(image_url,file_name)
+
+
+
+def plot_haiku_pil(haiku):
+
+    haiku_lines = haiku.splitlines()
+
+
+    FONT_FAMILY = "arial.ttf"
+    WIDTH = 2000
+    HEIGHT = 1200
+    FONT_SIZE = 50
+    V_MARGIN =  20
+    CHAR_LIMIT = 65
+    BG_COLOR = "white"
+    TEXT_COLOR = (0,0,0)
+
+    # Create the font
+    font = ImageFont.truetype("arial.ttf", 70)
+    # New image based on the settings defined above
+    img = Image.new("RGB", (2000, 1200),color=(255,255,255))
+    # Interface to draw on the image
+    draw_interface = ImageDraw.Draw(img)
+
+    # Wrap the `text` string into a list of `CHAR_LIMIT`-character strings
+    text_lines_haiku=3
+    # Get the first vertical coordinate at which to draw text and the height of each line of text
+    y_haiku, line_heights_haiku = get_y_and_heights(
+        text_lines,
+        (WIDTH, HEIGHT),
+        V_MARGIN,
+        font
+    )
+
+        # Draw each line of text
+    for i, line in enumerate(haiku_res_list):
+        # Calculate the horizontally-centered position at which to draw this line
+        print(line)
+        line_width = font.getmask(line).getbbox()[2]
+        x = ((WIDTH - line_width) // 2)
+      
+
+        # Draw this line
+        draw_interface.text((x, y_haiku+100), line, font=font, fill=TEXT_COLOR)
+
+        # Move on to the height at which the next line should be drawn at
+        #print(y)
+        y_haiku += line_heights_haiku[i]
+        
+
+    # Save the resulting image
+    img.save("haiku.png")
