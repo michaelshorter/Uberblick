@@ -11,7 +11,7 @@ import logging
 import urllib
 from provotype.prep import read_text
 from provotype.promts_gpt import generate_summarizer,do_summarization,summarize_summarized_texts,create_five_topics,scale_conversation,write_a_haiku,create_image
-from provotype.generate_output import plot_main_topics,plot_categories,plot_text,generate_image,plot_text_pil
+from provotype.generate_output import plot_main_topics,plot_categories,plot_text,generate_image,plot_text_pil,plot_haiku_pil
 import logging
 import sys
 
@@ -24,16 +24,16 @@ import sys
 
 def get_args():
     parser = argparse.ArgumentParser()
-    '''parser.add_argument('--configfile', default='/home/wordcloud/wordcloud_keys/config.ini',metavar='N', type=str, nargs='+',
-                        help='an integer for the accumulator')'''
-
-    parser.add_argument('--configfile', default='config.ini',metavar='N', type=str, nargs='+',
+    parser.add_argument('--configfile', default='/home/wordcloud/wordcloud_keys/config.ini',metavar='N', type=str, nargs='+',
                         help='an integer for the accumulator')
 
-    '''parser.add_argument('--textfile', default = '/home/wordcloud/WordCloud/AzureSpeechCC/content.txt', metavar='N', type=str, nargs='+',
+    '''parser.add_argument('--configfile', default='config.ini',metavar='N', type=str, nargs='+',
                         help='an integer for the accumulator')'''
-    parser.add_argument('--textfile', default = 'content.txt', metavar='N', type=str, nargs='+',
+
+    parser.add_argument('--textfile', default = '/home/wordcloud/WordCloud/AzureSpeechCC/content.txt', metavar='N', type=str, nargs='+',
                         help='an integer for the accumulator')
+    '''parser.add_argument('--textfile', default = 'content.txt', metavar='N', type=str, nargs='+',
+                        help='an integer for the accumulator')'''
     args = parser.parse_args()
     print(args.configfile)
     return args
@@ -78,7 +78,10 @@ def do_job(text_file):
 
     logger.info('starting with haiku')
     haiku = write_a_haiku(summary)
+
+    haiku_=haiku[0]['content']
     plot_text(haiku[0]['content'],'haiku.png','haiku')
+    #plot_haiku_pil(haiku_)
     logger.info('haiku done')
 
     logger.info('starting with image creation')
