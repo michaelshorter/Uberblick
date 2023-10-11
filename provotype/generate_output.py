@@ -49,7 +49,7 @@ def plot_main_topics(sorted_dict_topics):
 
     px = 1/plt.rcParams['figure.dpi']
     
-    fig = plt.figure(figsize=(640*px, 480*px))
+    fig = plt.figure(figsize=(640*px, 400*px))
     plt.clf()
     
     i = 0
@@ -69,7 +69,7 @@ def plot_categories(str_scale, str_rating):
     i=0
     px = 1/plt.rcParams['figure.dpi']
     
-    fig = plt.figure(figsize=(640*px, 480*px))
+    fig = plt.figure(figsize=(640*px, 400*px))
  
     # creating the bar plot
     bar = plt.barh(str_scale,str_rating, color ='blacK')
@@ -97,7 +97,7 @@ def plot_text(text,filename,variant):
     
     px = 1/plt.rcParams['figure.dpi']
 
-    fig = plt.figure(figsize=(640*px, 480*px))
+    fig = plt.figure(figsize=(640*px, 400*px))
 
     if variant == 'summary':
 
@@ -120,12 +120,12 @@ def plot_text(text,filename,variant):
 
 def plot_text_pil(text,filename):
 
-    FONT_FAMILY = "arial.ttf"
+    FONT_FAMILY = "Helvetica.ttf"
     WIDTH = 640
-    HEIGHT = 480
+    HEIGHT = 400
     FONT_SIZE = 20
     V_MARGIN =  1.5
-    CHAR_LIMIT = 65
+    CHAR_LIMIT = 60
     TEXT_COLOR = (0,0,0)
 
     # Create the font
@@ -173,48 +173,50 @@ def generate_image(img_url):
 def plot_haiku_pil(haiku):
 
     haiku_lines = haiku.splitlines()
+    print(haiku_lines)
 
 
-    FONT_FAMILY = "arial.ttf"
-    WIDTH = 2000
-    HEIGHT = 1200
-    FONT_SIZE = 50
+    FONT_FAMILY = "Helvetica.ttf"
+    WIDTH = 640
+    HEIGHT = 400
+    FONT_SIZE = 30
     V_MARGIN =  20
     CHAR_LIMIT = 65
     BG_COLOR = "white"
     TEXT_COLOR = (0,0,0)
 
     # Create the font
-    font = ImageFont.truetype("arial.ttf", 70)
+    font = ImageFont.truetype("Helvetica.ttf", 35)
     # New image based on the settings defined above
-    img = Image.new("RGB", (2000, 1200),color=(255,255,255))
+    img = Image.new("RGB", (640, 400),color=(255,255,255))
     # Interface to draw on the image
     draw_interface = ImageDraw.Draw(img)
 
     # Wrap the `text` string into a list of `CHAR_LIMIT`-character strings
-    text_lines_haiku=3
+    
     # Get the first vertical coordinate at which to draw text and the height of each line of text
-    y_haiku, line_heights_haiku = get_y_and_heights(
-        text_lines,
-        (WIDTH, HEIGHT),
-        V_MARGIN,
-        font
-    )
+    y_haiku=80 
+    line_heights_haiku = 50
 
         # Draw each line of text
-    for i, line in enumerate(haiku_res_list):
+    
+    for i, line in enumerate(haiku_lines):
         # Calculate the horizontally-centered position at which to draw this line
         print(line)
-        line_width = font.getmask(line).getbbox()[2]
-        x = ((WIDTH - line_width) // 2)
+        
+        try:
+            line_width = font.getmask(line).getbbox()[2]
+            x = ((WIDTH - line_width) // 2)
       
 
-        # Draw this line
-        draw_interface.text((x, y_haiku+100), line, font=font, fill=TEXT_COLOR)
+            # Draw this line
+            draw_interface.text((x, y_haiku+50), line, font=font, fill=TEXT_COLOR)
 
-        # Move on to the height at which the next line should be drawn at
-        #print(y)
-        y_haiku += line_heights_haiku[i]
+            # Move on to the height at which the next line should be drawn at
+            #print(y)
+            y_haiku += line_heights_haiku
+        except:
+            print('getbox not possible')
         
 
     # Save the resulting image
