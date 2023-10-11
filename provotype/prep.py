@@ -39,13 +39,13 @@ def read_text(textfile):
     
     print(len(data))
     
-    if len(data)>16000:
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size = 8000, chunk_overlap = 0)
+    if len(data)>14000:
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size = 7000, chunk_overlap = 0)
         texts= text_splitter.split_text(data)
         number_splits = len(texts)
         max_response_tokens = round(4096/number_splits-200)
 
-    elif len(data)>=8000 and len(data)<=16000:
+    elif len(data)>=7000 and len(data)<=14000:
         li = data.split()
         len_split = [len(li)//2]*2
         results = [li[x - y: x] for x, y in zip(accumulate(len_split), len_split)]

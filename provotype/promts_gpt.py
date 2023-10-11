@@ -100,8 +100,9 @@ def create_five_topics(text_data):
             response = openai.ChatCompletion.create(
                 model = model_id,
                 messages = [{'role':'system', 'content': 'You are a helpful research assistant.'},
-                            {'role': 'user', 'content':f"Give me the five most relevant topics (one word, sorted by highest til lowest) plus a probability between 0 and 1 \
-                            in a JSON object like {json_str} of following: {text_data}"},
+                            {'role': 'user', 'content':f"Give me the five most relevant topics plus a probability between 0 and 1. \
+                            Use only one word for each topic and sort from the highest til the lowest value.\
+                            Return it in a JSON object like {json_str} for the following text: {text_data}"},
                            ])
             
             api_usage = response['usage']
