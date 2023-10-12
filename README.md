@@ -3,16 +3,18 @@ The new ChatGPT enabled version of the WordCloud
 
   ******************************************************************************
 HOW TO CLONE FROM GITHUB
-Make sure that you've got an ssh key on your device 
-if not, do following:
 
+1. delete the folder WordCloud on your device
+
+2. Make sure that you've got an ssh key on your device 
+if not, do following:
 The first step involves creating a set of RSA keys for use in authentication.
 This should be done on the client.
 To create your public and private SSH keys on the command-line:
 
-mkdir ~/.ssh
-chmod 700 ~/.ssh
-ssh-keygen
+$ mkdir ~/.ssh
+$ chmod 700 ~/.ssh
+$ ssh-keygen
 
 You will be prompted for a location to save the keys, and a passphrase for the keys. This passphrase will protect your private key while it's stored on the hard drive:
 
@@ -23,13 +25,15 @@ Enter same passphrase again:
 Your identification has been saved in /home/b/.ssh/id_rsa.
 Your public key has been saved in /home/b/.ssh/id_rsa.pub.
 
-copy your ssh key with following line
+display your ssh key with following line and copy it
 
-cat ~/.ssh/id_rsa.pub
+$ cat ~/.ssh/id_rsa.pub
 
 insert your new ssh key into your git account - setting ssh keys
 
-clone the git repository with ssh
+3. clone the git repository with ssh:
+
+$ git clone <link> 'WordCloud'
 
   ******************************************************************************
 ADD NEW WIFI CREDENTIALS
