@@ -106,8 +106,8 @@ def do_job(text_file,lang):
         haiku = write_a_haiku_de(summary)
 
     haiku_=haiku[0]['content']
-    plot_text(haiku[0]['content'],'haiku.png','haiku')
-    #plot_haiku_pil(haiku_)
+    #plot_text(haiku[0]['content'],'haiku.png','haiku')
+    plot_haiku_pil(haiku_)
     logger.info('haiku done')
 
     logger.info('starting with image creation')

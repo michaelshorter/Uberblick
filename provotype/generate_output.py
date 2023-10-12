@@ -1,3 +1,4 @@
+
 import os.path
 import time
 import matplotlib.pyplot as plt
@@ -221,3 +222,4 @@ def plot_haiku_pil(haiku):
 
     # Save the resulting image
     img.save("haiku.png")
+

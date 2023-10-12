@@ -61,11 +61,10 @@ if __name__ == "__main__":
                 # Update the previous switch state
                 prev_switch_state = switch_position
             
-<<<<<<< HEAD
-            # Check if 1 minutes have passed since the last switch state change
-=======
+
+
             # Check if 7 minutes have passed since the last switch state change
->>>>>>> origin/main
+
             if time.time() - last_state_change_time >= 420:
                 # Perform image reload for the current switch state
                 if prev_switch_state in switch_images:
