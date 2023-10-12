@@ -26,11 +26,10 @@ Depending on your Ubuntu 20.04 system the wireless network interface name would 
 $ ls /etc/netplan/
 
 3. Edit the Netplan configuration file:
-4. 
+   
 $ sudoedit /etc/netplan/50-cloud-init.yaml
 
-and insert the following configuration stanza while replacing the SSID-NAME-HERE and PASSWORD-HERE with your SSID network name and password:
-Make sure that the wifis block is aligned with the above ethernets or version block if present. The entire configuration file may look similar to the one below:
+and insert the following configuration stanza while replacing the SSID-NAME-HERE and PASSWORD-HERE with your SSID network name and password. Make sure that the wifis block is aligned with the above ethernets or version block if present. The entire configuration file may look similar to the one below:
 
 network:
     ethernets:
