@@ -10,8 +10,9 @@ import os
 import logging
 import urllib
 from provotype.prep import read_text
-from provotype.promts_gpt import generate_summarizer,do_summarization,summarize_summarized_texts,create_five_topics,scale_conversation,write_a_haiku,create_image
+from provotype.promts_gpt import generate_summarizer,do_summarization,summarize_summarized_texts,create_five_topics,write_a_haiku,create_image
 from provotype.generate_output import plot_main_topics,plot_categories,plot_text,generate_image,plot_text_pil,plot_haiku_pil
+from provotype.promts_gpt_german import generate_summarizer_de,do_summarization_de,summarize_summarized_texts_de,create_five_topics,write_a_haiku_de
 import logging
 import sys
 
@@ -43,7 +44,8 @@ def parse_config(configfile):
     config = configparser.ConfigParser()   
     config.read(configfile)
     api_key = config['API']['my_api']
-    return api_key
+    lang= config['LANG']['my_lang']
+    return api_key, lang
  
 
 
@@ -58,17 +60,38 @@ def do_job(text_file):
     
 
     if nmb_splits >1:
-        text_summarization = do_summarization(split_text,nmb_splits, max_number_tokens)
 
-        text_summarization = " ".join(text_summarization)
+        if lang == "EN":
 
-        response_summary = summarize_summarized_texts(text_summarization)
+            text_summarization = do_summarization(split_text,nmb_splits, max_number_tokens)
+
+            text_summarization = " ".join(text_summarization)
+
+            response_summary = summarize_summarized_texts(text_summarization)
+
+        elif lang == "DE":
+
+            text_summarization = do_summarization_de(split_text,nmb_splits, max_number_tokens)
+
+            text_summarization = " ".join(text_summarization)
+
+            response_summary = summarize_summarized_texts_de(text_summarization)
+
 
 
     else:
 
-        text_summarization = split_text
-        response_summary = summarize_summarized_texts(split_text)
+        if lang == "EN":
+
+            text_summarization = split_text
+            response_summary = summarize_summarized_texts(split_text)
+
+        elif lang == "DE":
+
+            text_summarization = split_text
+            response_summary = summarize_summarized_texts_de(split_text)
+
+
         
     summary = response_summary[0]['content']
     logger.info('summarization done')
@@ -77,7 +100,10 @@ def do_job(text_file):
     #plot_text(summary,'summary.png','summary')
 
     logger.info('starting with haiku')
-    haiku = write_a_haiku(summary)
+    if lang == "EN":
+        haiku = write_a_haiku(summary)
+    elif lang == "DE":
+        haiku = write_a_haiku_de(summary)
 
     haiku_=haiku[0]['content']
     plot_text(haiku[0]['content'],'haiku.png','haiku')
@@ -93,14 +119,16 @@ def do_job(text_file):
      
 
     logger.info('starting with top topics')
-    sorted_dict_topic  = create_five_topics(summary)
+
+    if lang == "EN":
+
+        sorted_dict_topic  = create_five_topics(summary)
+    elif lang == "DE":
+        sorted_dict_topic  = create_five_topics_de(summary)
+
     plot_main_topics(sorted_dict_topic)
     logger.info('top topics done')
-    
 
-    '''list_scale, list_rating_scale = scale_conversation(text_summarization)
-    plot_categories(list_scale, list_rating_scale)
-    print("scale conversation done!\n")'''
 
 
 
@@ -112,7 +140,8 @@ def main(args):
     textfile = args.textfile
     
     if config is not None:
-        api_key = parse_config(config)
+        api_key,lang = parse_config(config)
+        
 
         openai.api_key = api_key
         
