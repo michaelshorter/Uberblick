@@ -62,7 +62,7 @@ if __name__ == "__main__":
                 prev_switch_state = switch_position
             
             # Check if 1 minutes have passed since the last switch state change
-            if time.time() - last_state_change_time >= 60:
+            if time.time() - last_state_change_time >= 420:
                 # Perform image reload for the current switch state
                 if prev_switch_state in switch_images:
                     os.system(f"python3 image.py '{switch_images[prev_switch_state]}'")

@@ -71,7 +71,7 @@ def do_summarization_de(split_text,number_splits,response_max_tokens):
             print("waiting for 60 seconds")
             sleep(60)
   
-        summ_text = generate_summarizer(max_tokens,split_text[i])
+        summ_text = generate_summarizer_de(max_tokens,split_text[i])
         summarized_text.append(summ_text)
     
       

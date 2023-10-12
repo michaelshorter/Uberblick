@@ -30,11 +30,11 @@ class Program
 
         var speechConfig = SpeechConfig.FromSubscription(YourSubscriptionKey, YourServiceRegion);
 	// Swiss German
-        //speechConfig.SpeechRecognitionLanguage = "de-CH";
+        speechConfig.SpeechRecognitionLanguage = "de-CH";
 	// German
         //speechConfig.SpeechRecognitionLanguage = "de-DE";
 	// English
-        speechConfig.SpeechRecognitionLanguage = "en-US";
+        //speechConfig.SpeechRecognitionLanguage = "en-US";
 
         //using var audioConfig = AudioConfig.FromMicrophoneInput("0");
 	using var audioConfig = AudioConfig.FromDefaultMicrophoneInput();
