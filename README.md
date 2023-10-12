@@ -3,9 +3,33 @@ The new ChatGPT enabled version of the WordCloud
 
   ******************************************************************************
 HOW TO CLONE FROM GITHUB
+Make sure that you've got an ssh key on your device 
+if not, do following:
 
+The first step involves creating a set of RSA keys for use in authentication.
+This should be done on the client.
+To create your public and private SSH keys on the command-line:
 
+mkdir ~/.ssh
+chmod 700 ~/.ssh
+ssh-keygen
 
+You will be prompted for a location to save the keys, and a passphrase for the keys. This passphrase will protect your private key while it's stored on the hard drive:
+
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/b/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/b/.ssh/id_rsa.
+Your public key has been saved in /home/b/.ssh/id_rsa.pub.
+
+copy your ssh key with following line
+
+cat ~/.ssh/id_rsa.pub
+
+insert your new ssh key into your git account - setting ssh keys
+
+clone the git repository with ssh
 
   ******************************************************************************
 ADD NEW WIFI CREDENTIALS
