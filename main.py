@@ -153,7 +153,7 @@ def main(args):
                 
                 do_job(textfile)
 
-                time.sleep(300)
+                time.sleep(420)
             
                  
         else:
