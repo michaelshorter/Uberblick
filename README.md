@@ -35,6 +35,11 @@ insert your new ssh key into your git account - setting ssh keys
 
 $ git clone <link> 'WordCloud'
 
+
+NETWORK NAME THAT UBEERBLICKS REMEMBER:
+SSID: Uniform Go 5
+Password: InUniform
+
   ******************************************************************************
 ADD NEW WIFI CREDENTIALS
 
