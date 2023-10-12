@@ -12,7 +12,7 @@ import urllib
 from provotype.prep import read_text
 from provotype.promts_gpt import generate_summarizer,do_summarization,summarize_summarized_texts,create_five_topics,write_a_haiku,create_image
 from provotype.generate_output import plot_main_topics,plot_categories,plot_text,generate_image,plot_text_pil,plot_haiku_pil
-from provotype.promts_gpt_german import generate_summarizer_de,do_summarization_de,summarize_summarized_texts_de,create_five_topics,write_a_haiku_de
+from provotype.promts_gpt_german import generate_summarizer_de,do_summarization_de,summarize_summarized_texts_de,create_five_topics_de,write_a_haiku_de
 import logging
 import sys
 
@@ -49,7 +49,7 @@ def parse_config(configfile):
  
 
 
-def do_job(text_file):
+def do_job(text_file,lang):
     
     from time import sleep
 
@@ -151,9 +151,9 @@ def main(args):
 
             while True:
                 
-                do_job(textfile)
+                do_job(textfile,lang)
 
-                time.sleep(300)
+                time.sleep(420)
             
                  
         else:
